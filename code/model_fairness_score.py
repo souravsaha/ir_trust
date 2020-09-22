@@ -2,6 +2,7 @@
 argument 1: result file
 argument 2: query file
 argument 3: top k document (value of k) k = 5, 10
+argument 4: metric type "j" - jaccard, "wj" - weighted jaccard
 '''
 
 import sys
@@ -63,7 +64,8 @@ def jaccard(list1, list2):
     union = (len(list1) + len(list2)) - intersection
     return float(intersection) / union
 
-# weighted jacard
+# weighted jacard: Earlier version: where we considered only intersection of two lists
+'''
 def weighted_jaccard(list1, list2):
     intersection_list = (list(set(list1).intersection(list2)))
     weighted_jaccard_score = 0
@@ -75,6 +77,29 @@ def weighted_jaccard(list1, list2):
         weighted_jaccard_score += math.exp(-x)
 
     return weighted_jaccard_score
+'''
+def union(list1, list2):
+    final_list = list(set(list1) | set(list2))
+    return final_list
+
+# weighted jaccard , define max list rank = 1000
+def weighted_jaccard(list1, list2):
+    union_list = union(list1, list2)
+    weighted_jaccard_score = 0.0
+    for docid in union_list:
+        list1_rank = 100        # default values
+        list2_rank = 100        # default values
+        if docid in list1: 
+            list1_rank = list1.index(docid)
+        if docid in list2:
+            list2_rank = list2.index(docid)
+        
+        x = (list1_rank - list2_rank)**2
+        weighted_jaccard_score += math.exp(-x)
+    
+    normalized_score = weighted_jaccard_score / len(union_list)
+    return normalized_score
+
 
 resfile = sys.argv[1]     # res file path as an argument
 queryfile = sys.argv[2]   # query file path as an argument
@@ -88,10 +113,11 @@ qid_user_session_map = process_query_file(queryfile)
 total_fairness_score = 0.0
 qid_user_count  = 0 
 
+print("All pairs")
 for qid_user in qid_user_session_map:
     qid_user_pairs = qid_user_session_map[qid_user]
     if len(qid_user_pairs) > 1:
-        print(qid_user_pairs)
+        #print(qid_user_pairs)
         qid_user_count += 1
 
         pair_count = 0 
@@ -108,8 +134,8 @@ for qid_user in qid_user_session_map:
                 del docids_pair_1[k:]
                 del docids_pair_2[k:]
             
-                print(docids_pair_1)
-                print(docids_pair_2)
+                #print(docids_pair_1)
+                #print(docids_pair_2)
                 
                 if metric == "j":
                     inverse_jacard = 1 - jaccard(docids_pair_1, docids_pair_2)
@@ -117,18 +143,20 @@ for qid_user in qid_user_session_map:
                 if metric == "wj":
                     inverse_weighted_jacard = 1 - weighted_jaccard(docids_pair_1, docids_pair_2)
                     model_fairness_score += inverse_weighted_jacard
-                
+                    #print(model_fairness_score)
+
                 pair_count += 1
         
         if pair_count > 0 :
             total_fairness_score += (model_fairness_score / pair_count)
-
+            
+            #print(total_fairness_score)
                 #print(len(qid_doc_list_map[pair[0]]))
                 #print(len(qid_doc_list_map[pair[1]]))
                 #compu fetch the list of the pair; truncate to top k ; and just compute
             
 #print(model_fairness_score)
-print(total_fairness_score/qid_user_count)
+print("Trust Metric score ", total_fairness_score/qid_user_count)
 #print(qid_doc_list_map)
 #print(qid_user_session_map)
 
