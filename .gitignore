@@ -1,0 +1,25 @@
+# Environment 
+.env
+.venv
+env/
+venv/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# Packaging
+eggs/
+build/
+dist/
+lib/
+lib64/
+var/
+wheel/
+
+# Byte Compiled Code
+__pycache__/
+*$py.class
+
+
+
+
