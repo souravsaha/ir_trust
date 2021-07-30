@@ -12,3 +12,7 @@ Example run:
 python3 model_fairness_score.py ../res_files/lmdir-100 ../robust-uqv.txt 5 wj
 
 ```
+
+## Contents
+- Traditional Retrieval Models
+- DRMM Ranking
