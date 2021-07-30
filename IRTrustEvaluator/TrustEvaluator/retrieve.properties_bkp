@@ -1,0 +1,102 @@
+index=/user1/faculty/cvpr/irlab/collections/indexed/msmacro
+
+#result file path
+#res.file=/user1/faculty/cvpr/irlab/sourav/ir_trust/res_files/result.txt
+
+#query file path
+#query.file=/user1/faculty/cvpr/irlab/sourav/ir_trust/IRTrustEvaluator/TrustEvaluator/MSMARCO_all_label.txt
+query.file=/user1/faculty/cvpr/irlab/sourav/ir_trust/msmarco-test2019-queries.tsv
+
+res.file=/user1/faculty/cvpr/irlab/sourav/ir_trust/msmarco_res
+#query file path
+#query.file=topics.xml
+
+#query file path
+
+#index path
+
+#feedback used or not
+feedback=false
+
+#evaluation flag
+eval=true
+
+#number of topdocs used for feedback
+fdbk.numtopdocs=20
+
+#stopwordFile
+stopfile=stop.txt
+
+#qrels.file=/user1/faculty/cvpr/irlab/collections/qrels/trec678rb
+qrels.file=/user1/faculty/cvpr/irlab/sourav/ir_trust/IRTrustEvaluator/TrustEvaluator/msmarco.qrels.full.tsv
+#number of topdocs retrieved
+retrieve.num_wanted=10
+#evaluate.graded=true
+
+#query expansion using rlm flag
+rlm.qe=false
+
+#query expansion term weight using rlm
+rlm.qe.newterms.wt=0.3
+
+#number of expansion terms
+rlm.qe.nterms=15
+
+#collection Trec/MSMARCO
+collection=MSMARCO
+
+#evaluation mode
+evalMode=trust1
+
+#rlm type (uni, bi, iid, conditional)
+rlm.type=bi
+
+#kde sigma value
+gaussian.sigma=10
+
+#kde h value
+kde.h=1
+
+#kde kernel type
+kde.kernel=gaussian
+
+#wordvec file
+#wordvecs.vecfile=C:/Users/Procheta/Downloads/tmp.vec
+wordvecs.vecfile=/user1/faculty/cvpr/irlab/collections/w2v-trained/trec678-analyzed-200-10-5-cbow-5-3.vec
+
+#wordvec file type
+wordvecs.readfrom=vec
+
+#retrieval model (BM25,LM)
+retrieveModel=BM25
+
+#querypairs file path
+#querypairs.file=C:/Users/Procheta/Downloads/robust-uqv.txt
+
+#querypairs.file=/user1/faculty/cvpr/irlab/sourav/ir_trust/robust-uqv.txt
+#querypairs.file=/user1/faculty/cvpr/irlab/sourav/ir_trust/IRTrustEvaluator/TrustEvaluator/MSMARCO_all_label.txt
+querypairs.file=/user1/faculty/cvpr/irlab/sourav/ir_trust/IRTrustEvaluator/TrustEvaluator/MSMARCO_all_label.txt
+
+
+fieldName=words
+debugMode=false
+#k=0.8
+#b=0.7
+lambda=0.7
+k=0.8
+b=0.7
+kde.queryexpansion=true
+kde.compose=true
+k=1.2
+b=0.7f
+
+debugMode=true
+docFile=doc.txt
+#drmm.output=/user1/faculty/cvpr/irlab/sourav/ir_trust/drmm_copy/IRTrustEvaluator/TrustEvaluator/neural-ranking-drmm/neural-ranking/result/trecrb_uqv_model_len_18.result
+#resultNew=/user1/faculty/cvpr/irlab/sourav/ir_trust/IRTrustEvaluator/TrustEvaluator/drmm_res_file_len_18
+drmm.output=/user1/faculty/cvpr/irlab/sourav/ir_trust/drmm_copy/IRTrustEvaluator/TrustEvaluator/haru
+resultNew=/user1/faculty/cvpr/irlab/sourav/ir_trust/IRTrustEvaluator/TrustEvaluator/haru2
+
+topicFile=/user1/faculty/cvpr/irlab/sourav/ir_trust/IRTrustEvaluator/TrustEvaluator/MSMARCO_topic.txt
+
+preRankedFile=/user1/faculty/cvpr/irlab/sourav/ir_trust/msmarco_preranked
