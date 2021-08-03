@@ -20,6 +20,7 @@ wheel/
 __pycache__/
 *$py.class
 
-
+# vim swap files
+*.swp
 
 
